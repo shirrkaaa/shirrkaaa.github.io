@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+    <book id="1">
+        <title>1984</title>
+        <authors>
+            <author>George Orwell</author>
+        </authors>
+        <editor>John Smith</editor>
+        <copies total="10" issued="4"/>
+        <shelf number="A1" genre="Dystopian" theme="Totalitarianism"/>
+    </book>
+    
+    <book id="2">
+        <title>To Kill a Mockingbird</title>
+        <authors>
+            <author>Harper Lee</author>
+        </authors>
+        <editor>Mary Johnson</editor>
+        <copies total="7" issued="2"/>
+        <shelf number="B3" genre="Classic" theme="Racial Injustice"/>
+    </book>
+    
+    <book id="3">
+        <title>The Great Gatsby</title>
+        <authors>
+            <author>F. Scott Fitzgerald</author>
+        </authors>
+        <editor>Robert Brown</editor>
+        <copies total="5" issued="1"/>
+        <shelf number="C2" genre="Classic" theme="The American Dream"/>
+    </book>
+    
+    <book id="4">
+        <title>Moby-Dick</title>
+        <authors>
+            <author>Herman Melville</author>
+        </authors>
+        <editor>William White</editor>
+        <copies total="8" issued="3"/>
+        <shelf number="D4" genre="Adventure" theme="Obsession"/>
+    </book>
+    
+    <book id="5">
+        <title>War and Peace</title>
+        <authors>
+            <author>Leo Tolstoy</author>
+        </authors>
+        <editor>Nikolai Ivanov</editor>
+        <copies total="6" issued="2"/>
+        <shelf number="E1" genre="Historical" theme="Napoleonic Wars"/>
+    </book>
+    
+    <book id="6">
+        <title>Pride and Prejudice</title>
+        <authors>
+            <author>Jane Austen</author>
+        </authors>
+        <editor>Emma Wilson</editor>
+        <copies total="9" issued="4"/>
+        <shelf number="F2" genre="Romance" theme="Social Class"/>
+    </book>
+    
+    <book id="7">
+        <title>The Catcher in the Rye</title>
+        <authors>
+            <author>J.D. Salinger</author>
+        </authors>
+        <editor>Oliver Stone</editor>
+        <copies total="7" issued="3"/>
+        <shelf number="G3" genre="Classic" theme="Teen Angst"/>
+    </book>
+    
+    <book id="8">
+        <title>The Hobbit</title>
+        <authors>
+            <author>J.R.R. Tolkien</author>
+        </authors>
+        <editor>Samuel Green</editor>
+        <copies total="10" issued="6"/>
+        <shelf number="H5" genre="Fantasy" theme="Adventure"/>
+    </book>
+    
+    <book id="9">
+        <title>The Brothers Karamazov</title>
+        <authors>
+            <author>Fyodor Dostoevsky</author>
+        </authors>
+        <editor>Vladimir Petrov</editor>
+        <copies total="6" issued="2"/>
+        <shelf number="I3" genre="Philosophical" theme="Faith and Doubt"/>
+    </book>
+    
+    <book id="10">
+        <title>Crime and Punishment</title>
+        <authors>
+            <author>Fyodor Dostoevsky</author>
+        </authors>
+        <editor>Sergey Ivanov</editor>
+        <copies total="8" issued="4"/>
+        <shelf number="J2" genre="Psychological" theme="Guilt and Redemption"/>
+    </book>
+</library>
