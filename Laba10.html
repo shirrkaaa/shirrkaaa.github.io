@@ -80,30 +80,7 @@
         <div id="code" class="content-section">
 
             <pre>
-&lt;!DOCTYPE library [
-    &lt;!ELEMENT library (book+)&gt;
-    
-    &lt;!ELEMENT book (title, authors, editor, copies, shelf)&gt;
-    &lt;!ATTLIST book id ID #REQUIRED&gt;
-
-    &lt;!ELEMENT title (#PCDATA)&gt;
-
-    &lt;!ELEMENT authors (author+)&gt;
-    &lt;!ELEMENT author (#PCDATA)&gt;
-
-    &lt;!ELEMENT editor (#PCDATA)&gt;
-
-    &lt;!ELEMENT copies EMPTY&gt;
-    &lt;!ATTLIST copies total CDATA #REQUIRED issued CDATA #REQUIRED&gt;
-
-    &lt;!ELEMENT shelf EMPTY&gt;
-    &lt;!ATTLIST shelf number CDATA #REQUIRED genre CDATA #REQUIRED theme CDATA #REQUIRED&gt;
-]&gt;
-
-
-    </pre>
-            <p>Код опису за допомгою XML Schema</p>
-            <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
     &lt;xsl:output method="html" indent="yes"/&gt;
     &lt;xsl:template match="/"&gt;
@@ -173,7 +150,9 @@
     &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;
 
-</pre>
+
+    </pre>
+         
         </div>
         <iframe id="resultFrame" class="content-section"></iframe>
     </div>
