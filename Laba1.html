@@ -21,20 +21,20 @@
             padding: 10px;
         }
 
-            #menu button {
-                width: 100%;
-                padding: 10px;
-                margin: 5px 0;
-                border: none;
-                background: #1976D2;
-                color: white;
-                font-size: 16px;
-                cursor: pointer;
-            }
+        #menu button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: #1976D2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-                #menu button:hover {
-                    background: #2196F3;
-                }
+        #menu button:hover {
+            background: #2196F3;
+        }
 
         #content {
             width: 80%;
@@ -60,18 +60,15 @@
             object-fit: contain;
         }
     </style>
-
 </head>
 <body>
 
-    <!-- Лівий фрейм з кнопками -->
     <div id="menu">
         <button onclick="showSection('umova')">Умова</button>
-        <button onclick="showSection('result')">Результат</button>
+        <button onclick="loadFrame('1.html')">Результат</button>
         <button onclick="showSection('code')">Код</button>
     </div>
 
-    <!-- Правий вміст -->
     <div id="content">
         <div id="umova">
             <h1>Лабораторна робота №1</h1>
@@ -81,11 +78,6 @@
                 багатосторінковий web-сайт для звітів щодо виконання лабораторних робіт.
                 Залити отримані документи на локальний сервер.
             </p>
-        </div>
-
-        <div id="result" style="display: none;">
-            <h1>Результат</h1>
-            <img src="\images\result1.png" />
         </div>
 
         <div id="code" style="display: none;">
@@ -99,15 +91,11 @@
     &lt;title&gt;Фреймова структура&lt;/title&gt;
 &lt;/head&gt;
 &lt;frameset cols="20%, 80%"&gt;
-    &lt;!-- Лівий вертикальний фрейм --&gt;
     &lt;frame src="menu.html" name="menuFrame"&gt;
-
-        &lt;frameset rows="30%, *"&gt;
-            &lt;!-- Верхній правий фрейм --&gt;
-            &lt;frame src="header.html" name="headerFrame"&gt;
-                &lt;!-- Нижній правий фрейм --&gt;
-            &lt;frame src="content.html" name="contentFrame"&gt;
-        &lt;/frameset&gt;
+    &lt;frameset rows="30%, *"&gt;
+        &lt;frame src="header.html" name="headerFrame"&gt;
+        &lt;frame src="content.html" name="contentFrame"&gt;
+    &lt;/frameset&gt;
 &lt;/frameset&gt;
 &lt;/html&gt;
             </pre>
@@ -117,10 +105,12 @@
     <script>
         function showSection(section) {
             document.getElementById("umova").style.display = "none";
-            document.getElementById("result").style.display = "none";
             document.getElementById("code").style.display = "none";
-
             document.getElementById(section).style.display = "block";
+        }
+
+        function loadFrame(page) {
+            parent.contentFrame.location = page;
         }
     </script>
 
