@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню та рух зображення</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .menu {
+            display: flex;
+            background-color: #333;
+            padding: 0;
+            list-style: none;
+        }
+
+        .menu-item {
+            position: relative;
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            min-width: 150px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .submenu li {
+                padding: 10px;
+                color: white;
+            }
+
+                .submenu li:hover {
+                    background-color: #555;
+                }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        #movingImage {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            transition: transform 3s linear;
+        }
+    </style>
+</head>
+<body>
+    <ul class="menu">
+        <li class="menu-item">
+            Меню 1
+            <ul class="submenu">
+                <li>Пункт 1.1</li>
+                <li>Пункт 1.2</li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            Меню 2
+            <ul class="submenu">
+                <li>Пункт 2.1</li>
+                <li>Пункт 2.2</li>
+            </ul>
+        </li>
+    </ul>
+
+    <button onclick="startMovingImage()">Запустити рух</button>
+    <img id="movingImage" src="laba2_pic.jpg" alt="Рухоме зображення">
+
+    <script>
+        function startMovingImage() {
+            let img = document.getElementById("movingImage");
+            img.style.transform = `translate(-${window.innerWidth - 100}px, ${window.innerHeight - 100}px)`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання №10</title>
+    <script>
+        function animateInput() {
+            let inputField = document.getElementById('inputField');
+            
+            inputField.style.position = "fixed";
+            inputField.style.bottom = "30px";
+            inputField.style.right = "180px";
+            
+            setTimeout(() => {
+                inputField.style.top = "0px";
+                inputField.style.left = "0px";
+                inputField.style.borderColor = "red";
+                inputField.value = "МАМА";
+                
+                setTimeout(() => {
+                    inputField.style.right = "0px";
+                    inputField.style.top = "0px";
+                    
+                    setTimeout(() => {
+                        inputField.style.display = "none";
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="inputField" style="position:fixed; bottom:30px; right:180px; border:1px solid black;" placeholder="Поле для тесту">
+    <button onclick="animateInput()">Запустити анімацію</button>
+</body>
+</html>

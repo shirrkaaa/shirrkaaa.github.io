@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фреймова структура</title>
+</head>
+<frameset cols="20%, 80%">
+    <!-- Лівий вертикальний фрейм -->
+    <frame src="menu.html" name="menuFrame">
+
+        <frameset rows="30%, *">
+            <!-- Верхній правий фрейм -->
+            <frame src="header.html" name="headerFrame">
+                <!-- Нижній правий фрейм  -->
+            <frame src="content.html" name="contentFrame">
+        </frameset>
+</frameset>
+</html>

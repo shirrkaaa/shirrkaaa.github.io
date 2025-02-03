@@ -1,0 +1,19 @@
+<!DOCTYPE library [
+    <!ELEMENT library (book+)>
+    
+    <!ELEMENT book (title, authors, editor, copies, shelf)>
+    <!ATTLIST book id ID #REQUIRED>
+
+    <!ELEMENT title (#PCDATA)>
+
+    <!ELEMENT authors (author+)>
+    <!ELEMENT author (#PCDATA)>
+
+    <!ELEMENT editor (#PCDATA)>
+
+    <!ELEMENT copies EMPTY>
+    <!ATTLIST copies total CDATA #REQUIRED issued CDATA #REQUIRED>
+
+    <!ELEMENT shelf EMPTY>
+    <!ATTLIST shelf number CDATA #REQUIRED genre CDATA #REQUIRED theme CDATA #REQUIRED>
+]>

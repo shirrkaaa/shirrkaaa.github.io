@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лабораторна робота №8</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        #menuFrame {
+            width: 20%;
+            background: #0D47A1;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+            #menuFrame button {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border: none;
+                background: #1976D2;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                #menuFrame button:hover {
+                    background: #2196F3;
+                }
+
+        #contentFrame {
+            width: 80%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        #umova {
+            display: block;
+        }
+
+        /* Стиль для iframe, щоб він займав всю ширину contentFrame */
+        #resultFrame {
+            width: 100%;
+            height: 100%; /* або задайте бажану висоту */
+            border: none; /* щоб прибрати рамку навколо iframe */
+        }
+    </style>
+</head>
+<body>
+    <div id="menuFrame">
+        <button onclick="showSection('umova')">Умова</button>
+        <button onclick="showResultPage('library.dtd')">Результат</button>
+        <button onclick="showSection('code')">Код</button>
+    </div>
+
+    <div id="contentFrame">
+        <div id="umova" class="content-section">
+            <h1>Лабораторна робота №8</h1>
+            <h2>Завдання:</h2>
+            <p>
+                1. Створити опис структури документа XML за допомогою DTD-схеми. DTD-схема
+                обов’язково має вміщати листи атрибутів елементів (3-4), має бути вказано
+                множинність входження в елементів XML –документ.<br /><br />
+                2. Виконати опис структури документа XML за допомогою XML Schema . Вона має
+                бути не згенерована автоматично! Та обов’язково вміщати елементи complexType (3-
+                4).
+
+            </p><br />
+
+        </div>
+        <div id="code" class="content-section">
+            <p>Код опису DTD</p>
+            <pre>
+&lt;!DOCTYPE library [
+    &lt;!ELEMENT library (book+)&gt;
+    
+    &lt;!ELEMENT book (title, authors, editor, copies, shelf)&gt;
+    &lt;!ATTLIST book id ID #REQUIRED&gt;
+
+    &lt;!ELEMENT title (#PCDATA)&gt;
+
+    &lt;!ELEMENT authors (author+)&gt;
+    &lt;!ELEMENT author (#PCDATA)&gt;
+
+    &lt;!ELEMENT editor (#PCDATA)&gt;
+
+    &lt;!ELEMENT copies EMPTY&gt;
+    &lt;!ATTLIST copies total CDATA #REQUIRED issued CDATA #REQUIRED&gt;
+
+    &lt;!ELEMENT shelf EMPTY&gt;
+    &lt;!ATTLIST shelf number CDATA #REQUIRED genre CDATA #REQUIRED theme CDATA #REQUIRED&gt;
+]&gt;
+
+
+    </pre>
+            <p>Код опису за допомгою XML Schema</p>
+            <pre>&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+
+    &lt;xs:element name="library"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="book" maxOccurs="unbounded"/&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name="book"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="title" type="xs:string"/&gt;
+                &lt;xs:element name="authors" type="AuthorsType"/&gt;
+                &lt;xs:element name="editor" type="xs:string"/&gt;
+                &lt;xs:element name="copies" type="CopiesType"/&gt;
+                &lt;xs:element name="shelf" type="ShelfType"/&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name="id" type="xs:ID" use="required"/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:complexType name="AuthorsType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="author" type="xs:string" maxOccurs="unbounded"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name="CopiesType"&gt;
+        &lt;xs:attribute name="total" type="xs:integer" use="required"/&gt;
+        &lt;xs:attribute name="issued" type="xs:integer" use="required"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name="ShelfType"&gt;
+        &lt;xs:attribute name="number" type="xs:string" use="required"/&gt;
+        &lt;xs:attribute name="genre" type="xs:string" use="required"/&gt;
+        &lt;xs:attribute name="theme" type="xs:string" use="required"/&gt;
+    &lt;/xs:complexType&gt;
+
+&lt;/xs:schema&gt;
+</pre>
+        </div>
+        <iframe id="resultFrame" class="content-section"></iframe>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function showResultPage(url) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById('resultFrame').style.display = 'block';
+            document.getElementById('resultFrame').src = url;
+        }
+    </script>
+</body>
+</html>
