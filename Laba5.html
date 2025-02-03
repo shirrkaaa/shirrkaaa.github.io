@@ -59,7 +59,7 @@
 <body>
     <div id="menuFrame">
         <button onclick="showSection('umova')">Умова</button>
-        <button onclick="showResultPage('4.html')">Результат</button>
+        <button onclick="showResultPage('5.html')">Результат</button>
         <button onclick="showSection('code')">Код</button>
     </div>
 
@@ -68,130 +68,167 @@
             <h1>Лабораторна робота №4</h1>
             <h2>Завдання:</h2>
             <p>
-                1. Створити сторінку з динамічним змістом &quot;Перевірка значень,
-                введених користувачем поля форми для реєстрації&quot;. Форма повинна
-                містити поля «Ім&#39;я», «Прізвище», «Найменування організації», «Номер
-                кредитної картки», «Номер телефону», «Адреса електронної пошти»,
-                кнопки «Надіслати» та «Очистити». <br /><br />
-
-                2. Здійснити перевірку заповненості даними всіх полів.<br /><br />
-
-                3. Побудувати шаблон для перевірки даних кредитної картки з
-                обмеженням кількості спроб неправильного введення даних трьома.<br /><br />
-
-                4. Остання перевірка має контролювати структуру та вміст полів
-                (правильність введення імені та прізвища, номери телефону, електронної
-                адреси.).<br /><br />
-
-                5. Варіант 10: Напишіть регулярний вираз, який знайде рядки наступного
-                вигляду: по краях стоять букви &#39;a&#39;, а між ними цифра від 3-х до 7-ми.<br />
+                Варіант 10: За натисканням на кнопку додати на сторінку зображення,
+яке буде відображатись поступово<br><br>
+                Блок жовтого кольору з текстом всередині рухається праворуч
+наліво, в
+центр сторінки блок стає червоним, потім текст
+стає жовтим, потім блок зменшується<br><br>
+Додати на сторінку форму, що містить декілька елементів форми, при
+цьому при виборі певного значення в одному елементі (див. приклади):<br>
+ відображати інший елемент (для парних варіантів),<br>
+ робити недоступним інший елемент (для непарних варіантів).
             </p><br />
 
         </div>
         <div id="code" class="content-section">
             <pre>
-
 &lt;!DOCTYPE html&gt;
 &lt;html lang="uk"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Перевірка введених даних&lt;/title&gt;
-    &lt;script&gt;
-        let cardAttempts = 3; // Лічильник спроб для номера картки
-
-        function validateForm(event) {
-            event.preventDefault();
-            let name = document.getElementById('name').value.trim();
-            let surname = document.getElementById('surname').value.trim();
-            let organization = document.getElementById('organization').value.trim();
-            let card = document.getElementById('card').value.trim();
-            let phone = document.getElementById('phone').value.trim();
-            let email = document.getElementById('email').value.trim();
-            let customString = document.getElementById('customString').value.trim();
-
-            let nameRegex = /^[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ'\-]+$/;
-            let phoneRegex = /^\+\d{1,3}-\d{2,3}-\d{3}-\d{2}-\d{2}$/;
-            let emailRegex = /^[\w.-]+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}$/;
-            let cardRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
-            let customRegex = /^a[3-7]a$/;
-
-            if (!name || !surname || !organization || !card || !phone || !email || !customString) {
-                alert('Будь ласка, заповніть всі поля!');
-                return;
-            }
-
-            if (!nameRegex.test(name)) {
-                alert('Неправильний формат імені!');
-                return;
-            }
-
-            if (!nameRegex.test(surname)) {
-                alert('Неправильний формат прізвища!');
-                return;
-            }
-
-            if (!phoneRegex.test(phone)) {
-                alert('Неправильний формат номера телефону! (Приклад: +380-67-123-45-67)');
-                return;
-            }
-
-            if (!emailRegex.test(email)) {
-                alert('Неправильний формат електронної пошти!');
-                return;
-            }
-
-            if (!cardRegex.test(card)) {
-                cardAttempts--;
-                if (cardAttempts > 0) {
-                    alert(`Неправильний номер картки! У вас залишилось ${cardAttempts} спроб.`);
-                } else {
-                    alert('Ви вичерпали кількість спроб для введення номера картки!');
-                    document.getElementById('card').disabled = true;
-                }
-                return;
-            }
-
-            if (!customRegex.test(customString)) {
-                alert('Рядок повинен починатися і закінчуватися на "a" та містити число від 3 до 7 між ними!');
-                return;
-            }
-
-            alert('Форма успішно відправлена!');
+    &lt;title&gt;Галерея зображень&lt;/title&gt;
+    &lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+    &lt;style&gt;
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { max-width: 100%; height: auto; max-height: 300px; }
+        .gallery-container { margin: 20px auto; max-width: 600px; }
+        .buttons { margin-top: 10px; }
+        
+        .animated-block {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background-color: yellow;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 1s, color 1s;
         }
 
-        function clearForm() {
-            document.getElementById('form').reset();
+        #dynamic-form, #password-form {
+            display: none;
+            margin-top: 20px;
         }
-    &lt;/script&gt;
+        .form-row { margin: 10px 0; }
+        #control-word { display: none; }
+    &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h2&gt;Перевірка значень, введених користувачем&lt;/h2&gt;
-    &lt;form id="form" onsubmit="validateForm(event)"&gt;
-        &lt;label for="name"&gt;Ім'я:&lt;/label&gt;
-        &lt;input type="text" id="name" required&gt;&lt;br&gt;
+    &lt;div class="gallery-container"&gt;
+        &lt;img id="gallery-image" src="images/img1.jpg" alt="Узбережжя Амальфи, Італія"&gt;
+        &lt;p id="image-caption"&gt;Узбережжя Амальфи, Італія&lt;/p&gt;
+        &lt;div class="buttons"&gt;
+            &lt;button id="prev"&gt;Назад&lt;/button&gt;
+            &lt;button id="next"&gt;Далі&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button id="add-image"&gt;Додати зображення&lt;/button&gt;
+    
+    &lt;div class="animated-block" id="animated-block"&gt;Анімація&lt;/div&gt;
 
-        &lt;label for="surname"&gt;Прізвище:&lt;/label&gt;
-        &lt;input type="text" id="surname" required&gt;&lt;br&gt;
-
-        &lt;label for="organization"&gt;Найменування організації:&lt;/label&gt;
-        &lt;input type="text" id="organization" required&gt;&lt;br&gt;
-
-        &lt;label for="card"&gt;Номер кредитної картки (XXXX-XXXX-XXXX-XXXX):&lt;/label&gt;
-        &lt;input type="text" id="card" required&gt;&lt;br&gt;
-
-        &lt;label for="phone"&gt;Номер телефону (+XXX-XX-XXX-XX-XX):&lt;/label&gt;
-        &lt;input type="text" id="phone" required&gt;&lt;br&gt;
-
-        &lt;label for="email"&gt;Адреса електронної пошти:&lt;/label&gt;
-        &lt;input type="email" id="email" required&gt;&lt;br&gt;
-
-        &lt;label for="customString"&gt;Рядок (a3a - a7a):&lt;/label&gt;
-        &lt;input type="text" id="customString" required&gt;&lt;br&gt;
-        
-        &lt;button type="submit"&gt;Надіслати&lt;/button&gt;
-        &lt;button type="button" onclick="clearForm()"&gt;Очистити&lt;/button&gt;
+    &lt;form id="password-form"&gt;
+        &lt;div class="form-row"&gt;
+            &lt;label for="password"&gt;Введіть пароль:&lt;/label&gt;
+            &lt;input type="password" id="password"&gt;
+        &lt;/div&gt;
+        &lt;div class="form-row"&gt;
+            &lt;input type="checkbox" id="show-control-word"&gt;
+            &lt;label for="show-control-word"&gt;Я хочу ввести контрольне слово&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div class="form-row" id="control-word"&gt;
+            &lt;label for="control-input"&gt;Введіть контрольне слово:&lt;/label&gt;
+            &lt;input type="text" id="control-input"&gt;
+        &lt;/div&gt;
     &lt;/form&gt;
+
+    &lt;form id="dynamic-form"&gt;
+        &lt;label for="select-option"&gt;Оберіть значення:&lt;/label&gt;
+        &lt;select id="select-option"&gt;
+            &lt;option value="1"&gt;Варіант 1&lt;/option&gt;
+            &lt;option value="2"&gt;Варіант 2&lt;/option&gt;
+            &lt;option value="3"&gt;Варіант 3&lt;/option&gt;
+            &lt;option value="4"&gt;Варіант 4&lt;/option&gt;
+        &lt;/select&gt;
+        
+        &lt;div id="extra-field" style="display: none;"&gt;
+            &lt;label for="extra-input"&gt;Додаткове поле:&lt;/label&gt;
+            &lt;input type="text" id="extra-input"&gt;
+        &lt;/div&gt;
+        &lt;label for="disabled-input"&gt;Недоступне поле:&lt;/label&gt;
+        &lt;input type="text" id="disabled-input"&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        $(document).ready(function() {
+            let images = [
+                { src: "images/img1.jpg", caption: "Узбережжя Амальфи, Італія" },
+                { src: "images/img2.jpg", caption: "Каліфорнійський будинок з видом на океан"},
+                { src: "images/img3.jpg", caption: "Фінляндія"}
+            ];
+            let currentIndex = 0;
+
+            function updateGallery() {
+                $("#gallery-image").attr("src", images[currentIndex].src).attr("alt", images[currentIndex].caption);
+                $("#image-caption").text(images[currentIndex].caption);
+            }
+
+            $("#next").click(function() {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateGallery();
+            });
+
+            $("#prev").click(function() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateGallery();
+            });
+
+            $("#add-image").click(function() {
+                let currentImage = images[currentIndex];
+                let newImage = $("<img>").attr("src", currentImage.src).attr("alt", currentImage.caption).css({"display": "none", "max-width": "100%", "height": "auto", "max-height": "300px"});
+                $(".gallery-container").append(newImage);
+                newImage.fadeIn(1000);
+            });
+
+            $("#animated-block").animate({ left: "50%" }, 2000, function() {
+                $(this).css({ "background-color": "red", "color": "yellow" });
+                $(this).animate({ width: "300px", height: "200px" }, 1000, function() {
+                    setTimeout(() => {
+                        $(this).fadeOut(1000, function() {
+                            $("#password-form").fadeIn(500);
+                        });
+                    }, 2000);
+                });
+            });
+
+            $("#show-control-word").change(function() {
+                if ($(this).is(":checked")) {
+                    $("#control-word").fadeIn(300);
+                } else {
+                    $("#control-word").fadeOut(300);
+                }
+            });
+
+            $("#select-option").change(function() {
+                let selectedValue = parseInt($(this).val());
+                
+                if (selectedValue % 2 === 0) {
+                    $("#extra-field").show();
+                    $("#disabled-input").prop("disabled", false);
+                } else {
+                    $("#extra-field").hide();
+                    $("#disabled-input").prop("disabled", true);
+                }
+            });
+        });
+    &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 
