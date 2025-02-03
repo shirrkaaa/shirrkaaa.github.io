@@ -14,37 +14,36 @@
             margin: 0;
         }
 
-        /* Контейнер для кнопок */
         .button-container {
             display: flex;
-            flex-direction: column; /* Располагаем кнопки вертикально */
-            align-items: center; /* Выравнивание по центру */
+            flex-direction: column; 
+            align-items: center; 
         }
 
         button {
-            background: linear-gradient(135deg, #2c6b2f, #1e5c25); /* Темно-зелёный градиент */
-            color: white; /* Белый текст */
-            font-size: 12px; /* Достаточно большой шрифт */
-            padding: 15px 30px; /* Отступы для кнопки */
-            margin: 10px; /* Отступы между кнопками */
-            border: none; /* Без рамки */
-            border-radius: 10px; /* Слегка острые углы */
-            cursor: pointer; /* Курсор в виде руки */
+            background: linear-gradient(135deg, #2c6b2f, #1e5c25); 
+            color: white; 
+            font-size: 12px; 
+            padding: 15px 30px; 
+            margin: 10px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
             transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; /* Анимация при наведении */
-            width: 200px; /* Ширина кнопок 200 пикселей */
-            max-width: 90%; /* Максимальная ширина не более 90% экрана */
+            width: 200px; 
+            max-width: 90%; 
         }
 
             button:hover {
                 transform: translateY(-5px); /* Лёгкий подъём кнопки при наведении */
-                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Увеличение тени */
-                color: #f1e100; /* Цвет текста изменится на жёлтый при наведении */
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+                color: #f1e100; 
             }
 
             button:active {
-                transform: translateY(2px); /* Лёгкое опускание кнопки при нажатии */
-                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Уменьшение тени при нажатии */
+                transform: translateY(2px);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); 
             }
     </style>
 </head>
