@@ -11,9 +11,88 @@
         .gallery-container { margin: 20px auto; max-width: 600px; }
         .buttons { margin-top: 10px; }
     </style>
+	<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        #menu {
+            width: 20%;
+            background: #0D47A1;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+            #menu button {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border: none;
+                background: #1976D2;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                #menu button:hover {
+                    background: #2196F3;
+                }
+
+        #content {
+            width: 80%;
+            padding: 20px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="gallery-container">
+
+    <!-- Лівий фрейм з кнопками -->
+    <div id="menu">
+        <button onclick="showSection('umova')">Умова</button>
+        <button onclick="showSection('result')">Результат</button>
+        <button onclick="showSection('code')">Код</button>
+    </div>
+
+    <!-- Правий вміст -->
+    <div id="content">
+        <div id="umova">
+            <h1>Лабораторна робота №1</h1>
+            <h2>Завдання:</h2>
+            <p>
+                Використовуючи структурну структуру створити
+                багатосторінковий web-сайт для звітів щодо виконання лабораторних робіт.
+                Залити отримані документи на локальний сервер.
+            </p>
+        </div>
+
+        <div id="result" style="display: none;">
+            <h1>Результат</h1>
+             <div class="gallery-container">
         <img id="gallery-image" src="images/img1.jpg" alt="Узбережжя Амальфи, Італія">
         <p id="image-caption">Узбережжя Амальфи, Італія</p>
         <div class="buttons">
@@ -47,5 +126,43 @@
             });
         });
     </script>
+        </div>
+
+        <div id="code" style="display: none;">
+            <h1>Код</h1>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="uk"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Фреймова структура&lt;/title&gt;
+&lt;/head&gt;
+&lt;frameset cols="20%, 80%"&gt;
+    &lt;!-- Лівий вертикальний фрейм --&gt;
+    &lt;frame src="menu.html" name="menuFrame"&gt;
+
+        &lt;frameset rows="30%, *"&gt;
+            &lt;!-- Верхній правий фрейм --&gt;
+            &lt;frame src="header.html" name="headerFrame"&gt;
+                &lt;!-- Нижній правий фрейм --&gt;
+            &lt;frame src="content.html" name="contentFrame"&gt;
+        &lt;/frameset&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            document.getElementById("umova").style.display = "none";
+            document.getElementById("result").style.display = "none";
+            document.getElementById("code").style.display = "none";
+
+            document.getElementById(section).style.display = "block";
+        }
+    </script>
+
 </body>
 </html>
