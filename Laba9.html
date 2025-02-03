@@ -80,71 +80,62 @@
         <div id="code" class="content-section">
             <p>Код опису DTD</p>
             <pre>
-&lt;!DOCTYPE library [
-    &lt;!ELEMENT library (book+)&gt;
-    
-    &lt;!ELEMENT book (title, authors, editor, copies, shelf)&gt;
-    &lt;!ATTLIST book id ID #REQUIRED&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" href="library.xsl"&gt;
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Library Catalog&lt;/title&gt;
+                &lt;style&gt;
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+                    .classic { background-color: #ffff99; }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;h2&gt;Library Catalog&lt;/h2&gt;
+                &lt;table&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Title&lt;/th&gt;
+                        &lt;th&gt;Author(s)&lt;/th&gt;
+                        &lt;th&gt;Editor&lt;/th&gt;
+                        &lt;th&gt;Genre&lt;/th&gt;
+                        &lt;th&gt;Total Copies&lt;/th&gt;
+                        &lt;th&gt;Issued&lt;/th&gt;
+                    &lt;/tr&gt;
+                    &lt;xsl:apply-templates select="library/book"/&gt;
+                &lt;/table&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
 
-    &lt;!ELEMENT title (#PCDATA)&gt;
+    &lt;xsl:template match="book"&gt;
+        &lt;tr&gt;
+            &lt;xsl:variable name="genre" select="shelf/@genre"/&gt;
+            &lt;xsl:variable name="class"&gt;
+                &lt;xsl:if test="$genre = 'Classic'"&gt;classic&lt;/xsl:if&gt;
+            &lt;/xsl:variable&gt;
+            &lt;tr class="{$class}"&gt;
+                &lt;td&gt;&lt;xsl:value-of select="title"/&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;xsl:for-each select="authors/author"&gt;
+                        &lt;xsl:value-of select="."/&gt;
+                        &lt;xsl:if test="position() != last()"&gt;, &lt;/xsl:if&gt;
+                    &lt;/xsl:for-each&gt;
+                &lt;/td&gt;
+                &lt;td&gt;&lt;xsl:value-of select="editor"/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;xsl:value-of select="shelf/@genre"/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;xsl:value-of select="copies/@total"/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;xsl:value-of select="copies/@issued"/&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tr&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
 
-    &lt;!ELEMENT authors (author+)&gt;
-    &lt;!ELEMENT author (#PCDATA)&gt;
-
-    &lt;!ELEMENT editor (#PCDATA)&gt;
-
-    &lt;!ELEMENT copies EMPTY&gt;
-    &lt;!ATTLIST copies total CDATA #REQUIRED issued CDATA #REQUIRED&gt;
-
-    &lt;!ELEMENT shelf EMPTY&gt;
-    &lt;!ATTLIST shelf number CDATA #REQUIRED genre CDATA #REQUIRED theme CDATA #REQUIRED&gt;
-]&gt;
 
 
     </pre>
-            <p>Код опису за допомгою XML Schema</p>
-            <pre>&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-
-    &lt;xs:element name="library"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="book" maxOccurs="unbounded"/&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
-    &lt;xs:element name="book"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;xs:element name="title" type="xs:string"/&gt;
-                &lt;xs:element name="authors" type="AuthorsType"/&gt;
-                &lt;xs:element name="editor" type="xs:string"/&gt;
-                &lt;xs:element name="copies" type="CopiesType"/&gt;
-                &lt;xs:element name="shelf" type="ShelfType"/&gt;
-            &lt;/xs:sequence&gt;
-            &lt;xs:attribute name="id" type="xs:ID" use="required"/&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
-    &lt;xs:complexType name="AuthorsType"&gt;
-        &lt;xs:sequence&gt;
-            &lt;xs:element name="author" type="xs:string" maxOccurs="unbounded"/&gt;
-        &lt;/xs:sequence&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name="CopiesType"&gt;
-        &lt;xs:attribute name="total" type="xs:integer" use="required"/&gt;
-        &lt;xs:attribute name="issued" type="xs:integer" use="required"/&gt;
-    &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name="ShelfType"&gt;
-        &lt;xs:attribute name="number" type="xs:string" use="required"/&gt;
-        &lt;xs:attribute name="genre" type="xs:string" use="required"/&gt;
-        &lt;xs:attribute name="theme" type="xs:string" use="required"/&gt;
-    &lt;/xs:complexType&gt;
-
-&lt;/xs:schema&gt;
-</pre>
+   
         </div>
         <iframe id="resultFrame" class="content-section"></iframe>
     </div>
