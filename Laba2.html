@@ -21,20 +21,20 @@
             padding: 10px;
         }
 
-            #menu button {
-                width: 100%;
-                padding: 10px;
-                margin: 5px 0;
-                border: none;
-                background: #1976D2;
-                color: white;
-                font-size: 16px;
-                cursor: pointer;
-            }
+        #menu button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: #1976D2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-                #menu button:hover {
-                    background: #2196F3;
-                }
+        #menu button:hover {
+            background: #2196F3;
+        }
 
         #content {
             width: 80%;
@@ -59,142 +59,30 @@
             max-height: 100%;
             object-fit: contain;
         }
-
-        .menu {
-            display: flex;
-            background-color: #333;
-            padding: 0;
-        }
-
-        .menu-item {
-            position: relative;
-            list-style: none;
-            padding: 15px 20px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .submenu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #444;
-            min-width: 150px;
-        }
-
-        .submenu li {
-            padding: 10px;
-            color: white;
-        }
-
-        .submenu li:hover {
-            background-color: #555;
-        }
-
-        #movingImage {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-        }
     </style>
-    <script>
-        function toggleSubMenu(event) {
-            event.stopPropagation();
-            let submenu = event.currentTarget.querySelector(".submenu");
-            submenu.style.display = submenu.style.display === "block" ? "none" : "block";
-        }
-        function hideSubMenu(event) {
-            let submenus = document.querySelectorAll(".submenu");
-            submenus.forEach(submenu => submenu.style.display = "none");
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".menu-item").forEach(item => {
-                item.addEventListener("mouseleave", () => {
-                    let submenu = item.querySelector(".submenu");
-                    if (submenu) submenu.style.display = "none";
-                });
-            });
-        });
-
-        function showSection(section) {
-            document.getElementById("umova").style.display = "none";
-            document.getElementById("result").style.display = "none";
-            document.getElementById("code").style.display = "none";
-
-            document.getElementById(section).style.display = "block";
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            let img = document.getElementById("movingImage");
-            let posX = window.innerWidth - 100;
-            let posY = 0;
-            let interval = setInterval(() => {
-                if (posX <= 0 && posY >= window.innerHeight - 100) {
-                    clearInterval(interval);
-                } else {
-                    posX -= 5;
-                    posY += 5;
-                    img.style.left = posX + "px";
-                    img.style.top = posY + "px";
-                }
-            }, 20);
-        });
-
-        function startMovingImage() {
-            let img = document.getElementById("movingImage");
-            img.style.display = "block";
-            let posX = window.innerWidth - 100;
-            let posY = 0;
-            let interval = setInterval(() => {
-                if (posX <= 0 && posY >= window.innerHeight - 100) {
-                    clearInterval(interval);
-                } else {
-                    posX -= 5;
-                    posY += 5;
-                    img.style.left = posX + "px";
-                    img.style.top = posY + "px";
-                }
-            }, 20);
-        }
-
-    </script>
 </head>
-<body onclick="hideSubMenu()">
-
+<body>
 
     <div id="menu">
         <button onclick="showSection('umova')">Умова</button>
-        <button onclick="showSection('result')">Результат</button>
+        <button onclick="loadFrame('Labs/2.html')">Результат</button>
         <button onclick="showSection('code')">Код</button>
     </div>
 
-    <!-- Правий вміст -->
     <div id="content">
         <div id="umova">
-            <h1>Лабораторна робота №2</h1><br />
+            <h1>Лабораторна робота №2</h1>
             <h2>Завдання:</h2>
             <p>
                 Варіант 3. Горизонтальне дворівневе меню, що розкривається при натисканні
-                лівою кнопкою миші. Другий рівень меню приховується, коли вказівник миші залишає
-                область вибраного пункту або меню.
+лівою кнопкою миші. Другий рівень меню приховується, коли вказівник миші залишає
+область вибраного пункту або меню.
+            </p><br><br>
+<p>
+                Варіант 10. Організуйте рух зображення з правого верхнього кута вікна до
+нижнього лівого.
             </p>
-            <br /><br />
-                  <p>
-                      Варіант 10. Організуйте рух зображення з правого верхнього кута вікна до
-                      нижнього лівого.
-                  </p>
         </div>
-
-        <a href="/Labs/2.html"><div id="result" style="display: none;"></a>
-        <h1>Результат</h1><hr />
-            
-        </div>
-        <br /><br />
-        <img id="movingImage" src="D:\localserver\OpenServer\domains\WP2\wp-content\img\result2_2.jpg">
 
         <div id="code" style="display: none;">
             <h1>Код</h1>
@@ -204,48 +92,31 @@
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Рух зображення&lt;/title&gt;
-    &lt;style&gt;
-        body {
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-        #movingImage {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            display: none;
-        }
-    &lt;/style&gt;
-    &lt;script&gt;
-        function startMovingImage() {
-            let img = document.getElementById(&quot;movingImage&quot;);
-            img.style.display = &quot;block&quot;;
-            let posX = window.innerWidth - 100;
-            let posY = 0;
-            let interval = setInterval(() =&gt; {
-                if (posX &lt;= 0 &amp;&amp; posY &gt;= window.innerHeight - 100) {
-                    clearInterval(interval);
-                } else {
-                    posX -= 5;
-                    posY += 5;
-                    img.style.left = posX + &quot;px&quot;;
-                    img.style.top = posY + &quot;px&quot;;
-                }
-            }, 20);
-        }
-    &lt;/script&gt;
+    &lt;title&gt;Фреймова структура&lt;/title&gt;
 &lt;/head&gt;
-&lt;body&gt;
-    &lt;button onclick=&quot;startMovingImage()&quot;&gt;Результат&lt;/button&gt;
-    &lt;img id=&quot;movingImage&quot; src=&quot;image.jpg&quot; alt=&quot;Рухоме зображення&quot;&gt;
-&lt;/body&gt;
+&lt;frameset cols="20%, 80%"&gt;
+    &lt;frame src="menu.html" name="menuFrame"&gt;
+    &lt;frameset rows="30%, *"&gt;
+        &lt;frame src="header.html" name="headerFrame"&gt;
+        &lt;frame src="content.html" name="contentFrame"&gt;
+    &lt;/frameset&gt;
+&lt;/frameset&gt;
 &lt;/html&gt;
             </pre>
         </div>
     </div>
+
+    <script>
+        function showSection(section) {
+            document.getElementById("umova").style.display = "none";
+            document.getElementById("code").style.display = "none";
+            document.getElementById(section).style.display = "block";
+        }
+
+        function loadFrame(page) {
+            parent.contentFrame.location = page;
+        }
+    </script>
 
 </body>
 </html>
