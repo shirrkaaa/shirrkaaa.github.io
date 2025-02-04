@@ -45,10 +45,10 @@
                 </table>
                 
                 <h2>Відфільтрована таблиця</h2>
-                <p>Фільтрація за критеріями:</p>
+                <p>Фільтрація за:</p>
                 <ul>
-                    <li>Жанр: <xsl:value-of select="$filterByGenre"/></li>
-                    <li>Автор: <xsl:value-of select="$filterByAuthor"/></li>
+                    <li><xsl:if test="$filterByGenre != ''">Жанр: <xsl:value-of select="$filterByGenre"/></xsl:if></li>
+                    <li><xsl:if test="$filterByAuthor != ''">Автор: <xsl:value-of select="$filterByAuthor"/></xsl:if></li>
                 </ul>
                 <table border="1">
                     <tr>
@@ -57,7 +57,11 @@
                         <th>Жанр</th>
                         <th>Редактор</th>
                     </tr>
-                    <xsl:apply-templates select="timetable/row[genre=$filterByGenre or author=$filterByAuthor]"/>
+                    <xsl:apply-templates select="timetable/row">
+                        <xsl:if test="(genre=$filterByGenre and $filterByGenre != '') or (author=$filterByAuthor and $filterByAuthor != '')">
+                            <xsl:copy-of select="."/>
+                        </xsl:if>
+                    </xsl:apply-templates>
                 </table>
             </body>
         </html>
