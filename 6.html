@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея зображень</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #moving-input {
+            position: absolute;
+            display: none;
+            padding: 5px;
+            border: 2px solid black;
+            max-width: 300px;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="moving-input">
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                let inputField = $("#moving-input");
+                inputField.css({"right": "180px", "bottom": "30px", "display": "block", "position": "absolute"})
+                    .animate({right: "auto", left: "0px", top: "0px"}, 1000, function() {
+                        inputField.css("border-color", "red").val("МАМА!");
+                        setTimeout(function() {
+                            inputField.animate({right: "0px", left: "auto", top: "0px"}, 1000, function() {
+                                inputField.fadeOut(1000);
+                            });
+                        }, 1000);
+                    });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

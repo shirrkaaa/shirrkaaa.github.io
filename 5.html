@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея зображень</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .animated-block {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background-color: yellow;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 1s, color 1s;
+        }
+
+        #dynamic-form, #password-form {
+            display: none;
+            margin-top: 20px;
+        }
+        .form-row { margin: 10px 0; }
+        #control-word { display: none; }
+    </style>
+</head>
+<body>
+    <div class="animated-block" id="animated-block">Анімація</div>
+
+    <form id="password-form">
+        <div class="form-row">
+            <label for="password">Введіть пароль:</label>
+            <input type="password" id="password">
+        </div>
+        <div class="form-row">
+            <input type="checkbox" id="show-control-word">
+            <label for="show-control-word">Я хочу ввести контрольне слово</label>
+        </div>
+        <div class="form-row" id="control-word">
+            <label for="control-input">Введіть контрольне слово:</label>
+            <input type="text" id="control-input">
+        </div>
+    </form>
+
+    <form id="dynamic-form">
+        <label for="select-option">Оберіть значення:</label>
+        <select id="select-option">
+            <option value="1">Варіант 1</option>
+            <option value="2">Варіант 2</option>
+            <option value="3">Варіант 3</option>
+            <option value="4">Варіант 4</option>
+        </select>
+        
+        <div id="extra-field" style="display: none;">
+            <label for="extra-input">Додаткове поле:</label>
+            <input type="text" id="extra-input">
+        </div>
+        <label for="disabled-input">Недоступне поле:</label>
+        <input type="text" id="disabled-input">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#animated-block").animate({ left: "50%" }, 2000, function() {
+                $(this).css({ "background-color": "red", "color": "yellow" });
+                $(this).animate({ width: "300px", height: "200px" }, 1000, function() {
+                    setTimeout(() => {
+                        $(this).fadeOut(1000, function() {
+                            $("#password-form").fadeIn(500);
+                        });
+                    }, 2000);
+                });
+            });
+
+            $("#show-control-word").change(function() {
+                if ($(this).is(":checked")) {
+                    $("#control-word").fadeIn(300);
+                } else {
+                    $("#control-word").fadeOut(300);
+                }
+            });
+
+            $("#select-option").change(function() {
+                let selectedValue = parseInt($(this).val());
+                
+                if (selectedValue % 2 === 0) {
+                    $("#extra-field").show();
+                    $("#disabled-input").prop("disabled", false);
+                } else {
+                    $("#extra-field").hide();
+                    $("#disabled-input").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
