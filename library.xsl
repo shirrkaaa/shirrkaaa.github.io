@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" href="library.xml">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:param name="sortBy" select="'author'"/>  
     <xsl:param name="filterByGenre" select="''"/> 
     <xsl:param name="filterByAuthor" select="''"/> 
@@ -18,7 +18,7 @@
                         <th>Genre</th>
                         <th>Editor</th>
                     </tr>
-                    <xsl:apply-templates select="library/book"/>
+                    <xsl:apply-templates select="timetable/row"/>
                 </table>
                 
                 <h2>Sorted Table</h2>
@@ -29,8 +29,8 @@
                         <th>Genre</th>
                         <th>Editor</th>
                     </tr>
-                    <xsl:apply-templates select="library/book">
-                        <xsl:sort select="authors/author" order="ascending" data-type="text"/>
+                    <xsl:apply-templates select="timetable/row">
+                        <xsl:sort select="author" order="ascending" data-type="text"/>
                     </xsl:apply-templates>
                 </table>
                 
@@ -43,17 +43,17 @@
                         <th>Genre</th>
                         <th>Editor</th>
                     </tr>
-                    <xsl:apply-templates select="library/book[shelf/@genre=$filterByGenre or authors/author=$filterByAuthor]"/>
+                    <xsl:apply-templates select="timetable/row[genre=$filterByGenre or author=$filterByAuthor]"/>
                 </table>
             </body>
         </html>
     </xsl:template>
 
-    <xsl:template match="book">
+    <xsl:template match="row">
         <tr>
             <td><xsl:value-of select="title"/></td>
-            <td><xsl:value-of select="authors/author"/></td>
-            <td><xsl:value-of select="shelf/@genre"/></td>
+            <td><xsl:value-of select="author"/></td>
+            <td><xsl:value-of select="genre"/></td>
             <td><xsl:value-of select="editor"/></td>
         </tr>
     </xsl:template>
