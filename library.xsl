@@ -40,7 +40,7 @@
                         <th>Редактор</th>
                     </tr>
                     <xsl:apply-templates select="timetable/row">
-                        <xsl:sort select="$sortBy" order="ascending" data-type="text"/>
+                        <xsl:sort select="*[name()=$sortBy]" order="ascending" data-type="text"/>
                     </xsl:apply-templates>
                 </table>
                 
