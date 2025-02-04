@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:param name="sortBy" select="'author'"/>  
-    <xsl:param name="filterByGenre" select="''"/> 
-    <xsl:param name="filterByAuthor" select="''"/> 
+    <xsl:param name="filterByGenre" select="'genre'"/> 
+    <xsl:param name="filterByAuthor" select="'author'"/> 
 
     <xsl:template match="/">
         <html>
