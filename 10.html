@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об'єктна модель документа XML - DOM</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Бібліотека книг</h1>
+    <table id="library-table">
+        <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Автор</th>
+                <th>Жанр</th>
+                <th>Тема</th>
+                <th>Всього копій</th>
+                <th>Видано копій</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Динамічний вміст таблиці -->
+        </tbody>
+    </table>
+
+    <script>
+        // Завантаження XML-файлу
+        fetch('library.xml')
+            .then(response => response.text())
+            .then(xmlText => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+                const rows = xmlDoc.getElementsByTagName("row");
+                const tableBody = document.querySelector("#library-table tbody");
+
+                // Функція для перетворення чисел у текст
+                function numberToWords(num) {
+                    const words = ["нуль", "один", "два", "три", "чотири", "п'ять", "шість", "сім", "вісім", "дев'ять", "десять"];
+                    return words[num] || num;
+                }
+
+                // Створення рядків таблиці
+                for (let row of rows) {
+                    const tr = document.createElement("tr");
+
+                    // Додавання колонок
+                    const title = row.getElementsByTagName("title")[0].textContent;
+                    const author = row.getElementsByTagName("author")[0].textContent;
+                    const genre = row.getElementsByTagName("genre")[0].textContent;
+                    const theme = row.getElementsByTagName("theme")[0].textContent;
+                    const totalCopies = numberToWords(parseInt(row.getElementsByTagName("total_copies")[0].textContent));
+                    const issuedCopies = numberToWords(parseInt(row.getElementsByTagName("issued_copies")[0].textContent));
+
+                    tr.innerHTML = `
+                        <td>${title}</td>
+                        <td>${author}</td>
+                        <td>${genre}</td>
+                        <td>${theme}</td>
+                        <td>${totalCopies}</td>
+                        <td>${issuedCopies}</td>
+                    `;
+
+                    tableBody.appendChild(tr);
+                }
+            })
+            .catch(error => console.error("Помилка завантаження XML:", error));
+    </script>
+</body>
+</html>
