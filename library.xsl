@@ -8,41 +8,54 @@
     <xsl:template match="/">
         <html>
             <head>
-                <title>Library</title>
+                <title>Бібліотека</title>
             </head>
             <body>
-                <h2>Original Table</h2>
+                <h2>Оригінальна таблиця</h2>
                 <table border="1">
                     <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                        <th>Editor</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Жанр</th>
+                        <th>Редактор</th>
                     </tr>
                     <xsl:apply-templates select="timetable/row"/>
                 </table>
                 
-                <h2>Sorted Table</h2>
+                <h2>Відсортована таблиця</h2>
+                <p>
+                    <xsl:choose>
+                        <xsl:when test="$sortBy = 'title'">Сортування за назвою</xsl:when>
+                        <xsl:when test="$sortBy = 'author'">Сортування за автором</xsl:when>
+                        <xsl:when test="$sortBy = 'genre'">Сортування за жанром</xsl:when>
+                        <xsl:when test="$sortBy = 'editor'">Сортування за редактором</xsl:when>
+                        <xsl:otherwise>Сортування за невідомим критерієм</xsl:otherwise>
+                    </xsl:choose>
+                </p>
                 <table border="1">
                     <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                        <th>Editor</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Жанр</th>
+                        <th>Редактор</th>
                     </tr>
                     <xsl:apply-templates select="timetable/row">
-                        <xsl:sort select="author" order="ascending" data-type="text"/>
+                        <xsl:sort select="$sortBy" order="ascending" data-type="text"/>
                     </xsl:apply-templates>
                 </table>
                 
-                <h2>Filtered Table</h2>
-                <p>Filter: Genre=<xsl:value-of select="$filterByGenre"/>; Author=<xsl:value-of select="$filterByAuthor"/></p>
+                <h2>Відфільтрована таблиця</h2>
+                <p>Фільтрація за критеріями:</p>
+                <ul>
+                    <li>Жанр: <xsl:value-of select="$filterByGenre"/></li>
+                    <li>Автор: <xsl:value-of select="$filterByAuthor"/></li>
+                </ul>
                 <table border="1">
                     <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                        <th>Editor</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Жанр</th>
+                        <th>Редактор</th>
                     </tr>
                     <xsl:apply-templates select="timetable/row[genre=$filterByGenre or author=$filterByAuthor]"/>
                 </table>
