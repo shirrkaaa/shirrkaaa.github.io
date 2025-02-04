@@ -24,9 +24,10 @@
                 <h2>Відсортована таблиця</h2>
                 <p>
                     <xsl:choose>
-   
+                        <xsl:when test="$sortBy = 'title'">Сортування за назвою</xsl:when>
                         <xsl:when test="$sortBy = 'author'">Сортування за автором</xsl:when>
-
+                        <xsl:when test="$sortBy = 'genre'">Сортування за жанром</xsl:when>
+                        <xsl:when test="$sortBy = 'editor'">Сортування за редактором</xsl:when>
                         <xsl:otherwise>Сортування за невідомим критерієм</xsl:otherwise>
                     </xsl:choose>
                 </p>
@@ -43,10 +44,7 @@
                 </table>
                 
                 <h2>Відфільтрована таблиця</h2>
-                <p>Фільтрація за:</p>
-                <ul>
-                    <li><xsl:if test="$filterByGenre != ''">Жанр: <xsl:value-of select="$filterByGenre"/></xsl:if></li>
-                </ul>
+                <p>Фільтрація за жанром: <b><xsl:value-of select="$filterByGenre"/></b></p>
                 <table border="1">
                     <tr>
                         <th>Назва</th>
@@ -54,11 +52,7 @@
                         <th>Жанр</th>
                         <th>Редактор</th>
                     </tr>
-                    <xsl:apply-templates select="timetable/row">
-                        <xsl:if test="(genre=$filterByGenre and $filterByGenre != '')">
-                            <xsl:copy-of select="."/>
-                        </xsl:if>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="timetable/row[genre=$filterByGenre]"/>
                 </table>
             </body>
         </html>
